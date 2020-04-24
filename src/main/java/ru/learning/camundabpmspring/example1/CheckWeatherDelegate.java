@@ -1,4 +1,4 @@
-package ru.learning.camundabpmspring.task;
+package ru.learning.camundabpmspring.example1;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;

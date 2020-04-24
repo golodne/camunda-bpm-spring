@@ -1,4 +1,4 @@
-package ru.learning.camundabpmspring.task;
+package ru.learning.camundabpmspring.example1;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -11,6 +11,12 @@ public class LoggerDelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
+
+
+        String name = execution.getVariable("name").toString();
+        Boolean flag = Boolean.valueOf(execution.getVariable("weatherOk").toString());
+
+        LOGGER.info("name = " + name + ", " + "weatherOk =" + flag);
 
         LOGGER.info("\n\n invoke LoggerDelegage"
                 + " processDefinitionId = " + execution.getProcessDefinitionId()
