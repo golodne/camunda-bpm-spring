@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1k921id" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:process id="validateAdmin" name="ValidateAdmin" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="user" label="Имя пользователя" type="string" defaultValue="admin" />
+          <camunda:formField id="amount" type="long" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0fpt06u</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0fpt06u" sourceRef="StartEvent_1" targetRef="validAdmin" />
+    <bpmn:serviceTask id="validAdmin" name="Validate on admin" camunda:type="external" camunda:topic="testOk">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="user" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0fpt06u</bpmn:incoming>
+      <bpmn:outgoing>Flow_0b11u71</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0b11u71" sourceRef="validAdmin" targetRef="operatorAccept" />
+    <bpmn:userTask id="operatorAccept">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="user" label="Имя пользователя" type="string" />
+          <camunda:formField id="isAuth" type="boolean" />
+          <camunda:formField id="amount" type="long" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0b11u71</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mj0qjc</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0u2kx1p">
+      <bpmn:incoming>Flow_0mj0qjc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0mj0qjc" sourceRef="operatorAccept" targetRef="Event_0u2kx1p" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="validateAdmin">
+      <bpmndi:BPMNEdge id="Flow_0fpt06u_di" bpmnElement="Flow_0fpt06u">
+        <di:waypoint x="188" y="100" />
+        <di:waypoint x="240" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0b11u71_di" bpmnElement="Flow_0b11u71">
+        <di:waypoint x="340" y="100" />
+        <di:waypoint x="400" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mj0qjc_di" bpmnElement="Flow_0mj0qjc">
+        <di:waypoint x="500" y="100" />
+        <di:waypoint x="562" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xwj7cc_di" bpmnElement="validAdmin">
+        <dc:Bounds x="240" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xivsj8_di" bpmnElement="operatorAccept">
+        <dc:Bounds x="400" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0u2kx1p_di" bpmnElement="Event_0u2kx1p">
+        <dc:Bounds x="562" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
