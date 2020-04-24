@@ -15,7 +15,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-//@Import(SpringProcessEngineServicesConfiguration.class )
+@Import(SpringProcessEngineServicesConfiguration.class )
 public class CamundaConfig {
 
     @Bean
@@ -27,13 +27,13 @@ public class CamundaConfig {
         driver.setPassword("admin");
         return driver;
     }
- //   @Autowired
-//    private ResourcePatternResolver resourceLoader;
+    @Autowired
+    private ResourcePatternResolver resourceLoader;
 
-/*
+
     @Bean
     public PlatformTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(getPostgresDataSource());
+        return new DataSourceTransactionManager(dataSource());
     }
-*/
+
 }
