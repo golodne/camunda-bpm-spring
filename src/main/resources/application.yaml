@@ -1,0 +1,35 @@
+#server.port=8080
+#camunda.bpm.history-level=full
+#camunda.bpm.history-level-default=full
+#camunda.bpm.admin-user.id=root
+#camunda.bpm.admin-user.password=root
+#camunda.bpm.admin-user.firstName=root
+#camunda.bpm.admin-user.lastName=admin
+#camunda.bpm.metrics.enabled=true
+
+spring.application.name: CamundaBPMApp
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/camundo
+    username: admin
+    password: admin
+camunda:
+  bpm:
+    history-level: FULL
+    auto-deployment-enabled: true
+    admin-user:
+      id: demo
+      password: demo
+#      firstName: admin
+#      lastName: root
+    application:
+      delete-upon-undeploy: false
+      scan-for-process-definitions: false
+      deploy-changed-only: true
+      resume-previous-versions: true
+      resume-previous-by: a value
+    job-execution:
+      enabled: true
+    metrics:
+      enabled: false
+      db-reporter-activate: false
