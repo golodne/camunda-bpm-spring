@@ -11,8 +11,8 @@ spring.application.name: CamundaBPMApp
 spring:
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/camundo
-    username: admin
-    password: admin
+    username: demo
+    password: demo
 camunda:
   bpm:
     history-level: FULL

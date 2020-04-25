@@ -22,7 +22,7 @@ public class CamundaConfig {
     public DataSource dataSource(){
         DriverManagerDataSource driver = new DriverManagerDataSource();
         driver.setDriverClassName("org.postgresql.Driver");
-        driver.setUrl("jdbc:postgresql://localhost:5432/camundo");
+        driver.setUrl("jdbc:postgresql://localhost:5432/camunda");
         driver.setUsername("admin");
         driver.setPassword("admin");
         return driver;
