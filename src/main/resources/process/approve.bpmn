@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1taveka" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:collaboration id="Collaboration_1jvro4x">
+    <bpmn:participant id="approve" name="Approve" processRef="Approve" />
+  </bpmn:collaboration>
+  <bpmn:process id="Approve" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0rbkm1h</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0rbkm1h" sourceRef="StartEvent_1" targetRef="Activity_0lk52to" />
+    <bpmn:serviceTask id="Activity_0lk52to" name="отобрать все заявки, которые нужно согласовать" camunda:delegateExpression="${selectAppDelegate}">
+      <bpmn:incoming>Flow_0rbkm1h</bpmn:incoming>
+      <bpmn:outgoing>Flow_1dm4juj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1dm4juj" sourceRef="Activity_0lk52to" targetRef="Activity_1pg7yde" />
+    <bpmn:sequenceFlow id="Flow_1wdupx4" sourceRef="Activity_1lcdvue" targetRef="Activity_0zbbxz5" />
+    <bpmn:endEvent id="Event_173lank">
+      <bpmn:incoming>Flow_0slhm97</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0slhm97" sourceRef="Activity_0zbbxz5" targetRef="Event_173lank" />
+    <bpmn:sendTask id="Activity_0zbbxz5" name="Уведомить заказчика о результатах" camunda:delegateExpression="${sendAllDelegate}">
+      <bpmn:incoming>Flow_1wdupx4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0slhm97</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="Activity_1lcdvue" name="согласовать все" camunda:delegateExpression="${approveDelegate}">
+      <bpmn:incoming>Flow_0a2zeew</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wdupx4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0a2zeew" sourceRef="Activity_1pg7yde" targetRef="Activity_1lcdvue" />
+    <bpmn:userTask id="Activity_1pg7yde" name="see">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="listAppData" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1dm4juj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0a2zeew</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1jvro4x">
+      <bpmndi:BPMNShape id="Participant_17lw2p0_di" bpmnElement="approve" isHorizontal="true">
+        <dc:Bounds x="152" y="80" width="838" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0rbkm1h_di" bpmnElement="Flow_0rbkm1h">
+        <di:waypoint x="238" y="190" />
+        <di:waypoint x="290" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dm4juj_di" bpmnElement="Flow_1dm4juj">
+        <di:waypoint x="390" y="190" />
+        <di:waypoint x="420" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wdupx4_di" bpmnElement="Flow_1wdupx4">
+        <di:waypoint x="650" y="190" />
+        <di:waypoint x="700" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0slhm97_di" bpmnElement="Flow_0slhm97">
+        <di:waypoint x="800" y="190" />
+        <di:waypoint x="832" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0a2zeew_di" bpmnElement="Flow_0a2zeew">
+        <di:waypoint x="520" y="190" />
+        <di:waypoint x="550" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="202" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0gxy0k6_di" bpmnElement="Activity_0lk52to">
+        <dc:Bounds x="290" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_173lank_di" bpmnElement="Event_173lank">
+        <dc:Bounds x="832" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1li3mx0_di" bpmnElement="Activity_0zbbxz5">
+        <dc:Bounds x="700" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qcktaq_di" bpmnElement="Activity_1lcdvue">
+        <dc:Bounds x="550" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_056anvc_di" bpmnElement="Activity_1pg7yde">
+        <dc:Bounds x="420" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
