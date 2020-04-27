@@ -1,4 +1,3 @@
-#server.port=8080
 #camunda.bpm.history-level=full
 #camunda.bpm.history-level-default=full
 #camunda.bpm.admin-user.id=root
@@ -7,8 +6,8 @@
 #camunda.bpm.admin-user.lastName=admin
 #camunda.bpm.metrics.enabled=true
 
-server:
-  port: 8086
+#server:
+#  port: 8086
 
 restProxyHost: localhost
 restProxyPort: 8082

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1c4sara" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1c4sara" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
   <bpmn:collaboration id="Collaboration_0zmalw9">
     <bpmn:participant id="account" name="Account" processRef="AccountProcess" />
   </bpmn:collaboration>
@@ -17,10 +17,30 @@
       <bpmn:incoming>Flow_1vzv2k0</bpmn:incoming>
       <bpmn:outgoing>Flow_0o4wq4u</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:endEvent id="Event_03xzc9d">
+    <bpmn:sequenceFlow id="Flow_0o4wq4u" sourceRef="RetriveAccountAdapter" targetRef="Activity_05r6tyk" />
+    <bpmn:sequenceFlow id="Flow_194882b" sourceRef="Activity_05r6tyk" targetRef="Event_167n4n2" />
+    <bpmn:userTask id="Activity_05r6tyk" name="approve">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="id" label="Идентификатор от рест запроса" type="long" />
+          <camunda:formField id="username" label="Имя пользователя" type="string" />
+          <camunda:formField id="approved" label="Подтвержден" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0o4wq4u</bpmn:incoming>
+      <bpmn:outgoing>Flow_194882b</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_03xzc9d">
+      <bpmn:incoming>Flow_1bwgfx0</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0o4wq4u" sourceRef="RetriveAccountAdapter" targetRef="Event_03xzc9d" />
+    <bpmn:sequenceFlow id="Flow_1bwgfx0" sourceRef="Event_167n4n2" targetRef="Event_03xzc9d" />
+    <bpmn:intermediateCatchEvent id="Event_167n4n2" name="wait 1 min">
+      <bpmn:incoming>Flow_194882b</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bwgfx0</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0mu707v">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0zmalw9">
@@ -33,7 +53,15 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0o4wq4u_di" bpmnElement="Flow_0o4wq4u">
         <di:waypoint x="350" y="190" />
-        <di:waypoint x="402" y="190" />
+        <di:waypoint x="420" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_194882b_di" bpmnElement="Flow_194882b">
+        <di:waypoint x="520" y="190" />
+        <di:waypoint x="602" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bwgfx0_di" bpmnElement="Flow_1bwgfx0">
+        <di:waypoint x="638" y="190" />
+        <di:waypoint x="732" y="190" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="162" y="172" width="36" height="36" />
@@ -41,8 +69,17 @@
       <bpmndi:BPMNShape id="Activity_08s7ibs_di" bpmnElement="RetriveAccountAdapter">
         <dc:Bounds x="250" y="150" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0plg6yx_di" bpmnElement="Activity_05r6tyk">
+        <dc:Bounds x="420" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_03xzc9d_di" bpmnElement="Event_03xzc9d">
-        <dc:Bounds x="402" y="172" width="36" height="36" />
+        <dc:Bounds x="732" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1yi1bo9_di" bpmnElement="Event_167n4n2">
+        <dc:Bounds x="602" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="596" y="215" width="49" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
