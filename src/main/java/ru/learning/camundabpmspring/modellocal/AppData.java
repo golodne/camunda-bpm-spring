@@ -1,4 +1,4 @@
-package ru.learning.camundabpmspring.model;
+package ru.learning.camundabpmspring.modellocal;
 
 import lombok.Data;
 

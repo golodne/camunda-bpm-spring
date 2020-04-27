@@ -3,7 +3,7 @@ package ru.learning.camundabpmspring.adapter;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
-import ru.learning.camundabpmspring.model.AppData;
+import ru.learning.camundabpmspring.modellocal.AppData;
 
 import java.util.List;
 import java.util.Random;
