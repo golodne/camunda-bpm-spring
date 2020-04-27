@@ -15,12 +15,12 @@ import java.util.List;
 @Component("selectAppDelegate")
 public class SelectAppDelegate implements JavaDelegate {
 
-    //@Autowired
-    //RuntimeService runtimeService;
+    @Autowired
+    RuntimeService runtimeService;
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
+        //RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
         //отобрать все активные процессы, у которых DefinitionKey (processId)
         List<ProcessInstance> listProcessInstance = runtimeService.createProcessInstanceQuery()
                                                                   .active() //все активные задачи
