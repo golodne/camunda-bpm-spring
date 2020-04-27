@@ -53,6 +53,7 @@ public class SelectAppDelegate implements JavaDelegate {
                     appData.setId(idForm);
                     appData.setDescription(descriptionForm);
                     appData.setAmount(amountForm);
+                    appData.setProcessInstanceId(currentProcess.getId());
 
             listAppData.add(appData);
         });
