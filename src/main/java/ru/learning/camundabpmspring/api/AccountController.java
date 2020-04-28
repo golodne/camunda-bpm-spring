@@ -1,31 +1,37 @@
 package ru.learning.camundabpmspring.api;
 
+import lombok.extern.log4j.Log4j2;
 import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
+import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.variable.Variables;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.learning.camundabpmspring.ProcessConstants;
 
-@RestController
+@Controller
 @RequestMapping("/testAccount")
+@Log4j2
 public class AccountController {
 
     @Autowired
     private ProcessEngine camunda;
 
-    @RequestMapping(method= RequestMethod.POST)
-    public void placeOrderPOST(String name) {
-        placeAccount(name);
-    }
+    @Autowired
+    TaskService taskService;
 
-    public ProcessInstance placeAccount(String name) {
-        return camunda.getRuntimeService().startProcessInstanceByKey(
-                ProcessConstants.PROCESS_KEY_ACCOUNT,
-                Variables
-                        .putValue(ProcessConstants.VAR_NAME_USERNAME, name));
-                        //.putValue(ProcessConstants.VAR_NAME_amount, amount));
+    @RequestMapping(method= RequestMethod.POST)
+    @ResponseBody
+    public String placeOrderPOST(String name) {
+        ProcessInstanceWithVariables instance = camunda.getRuntimeService()
+                .createProcessInstanceByKey( ProcessConstants.PROCESS_KEY_ACCOUNT)
+                .executeWithVariablesInReturn();
+        return "teset";
     }
 }

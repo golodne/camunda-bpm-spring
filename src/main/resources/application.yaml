@@ -5,9 +5,8 @@
 #camunda.bpm.admin-user.firstName=root
 #camunda.bpm.admin-user.lastName=admin
 #camunda.bpm.metrics.enabled=true
-
-#server:
-#  port: 8086
+server:
+  port: 8086
 
 restProxyHost: localhost
 restProxyPort: 8082
